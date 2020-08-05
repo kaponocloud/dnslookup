@@ -1,4 +1,4 @@
-module github.com/ameshkov/dnslookup
+module github.com/kaponocloud/dnslookup
 
 go 1.14
 
