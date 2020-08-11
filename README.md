@@ -8,11 +8,13 @@ Simple command line utility to make DNS lookups to the specified server.
 
 ### How to install
 
-You can get a binary from the [releases page](https://github.com/ameshkov/dnslookup/releases).
+<!-- You can get a binary from the [releases page](https://github.com/ameshkov/dnslookup/releases).
 
 Or you can install it from the Snap Store:
-[![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/dnslookup)
+[![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/dnslookup) -->
 
+- Run "make build" to build a binary locally for testing
+- Run "make docker" to build releases. Make sure to include GOOS and GOARCH in a .env file.
 
 ### Examples:
 
@@ -21,27 +23,32 @@ Plain DNS:
 ./dnslookup example.org 176.103.130.130
 ```
 
+Plain DNS over ipv6:
+```
+./dnslookup example.org 176.103.130.130 AAAA
+```
+
 DNS-over-TLS:
 ```
 ./dnslookup example.org tls://dns.adguard.com
 ```
 
-DNS-over-TLS with IP:
+<!-- DNS-over-TLS with IP:
 ```
 ./dnslookup example.org tls://dns.adguard.com 176.103.130.130
-```
+``` -->
 
 DNS-over-HTTPS:
 ```
 ./dnslookup example.org https://dns.adguard.com/dns-query
 ```
 
-DNS-over-HTTPS with IP:
+<!-- DNS-over-HTTPS with IP:
 ```
 ./dnslookup example.org https://dns.adguard.com/dns-query 176.103.130.130
-```
+``` -->
 
-DNSCrypt (stamp):
+<!-- DNSCrypt (stamp):
 ```
 ./dnslookup example.org sdns://AQIAAAAAAAAAFDE3Ni4xMDMuMTMwLjEzMDo1NDQzINErR_JS3PLCu_iZEIbq95zkSV2LFsigxDIuUso_OQhzIjIuZG5zY3J5cHQuZGVmYXVsdC5uczEuYWRndWFyZC5jb20
 ```
@@ -54,4 +61,4 @@ DNSCrypt (parameters):
 Machine-readable format:
 ```
 JSON=1 ./dnslookup example.org 176.103.130.130
-```
+``` -->

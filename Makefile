@@ -1,9 +1,12 @@
+include .env
 NAME=dnslookup
 BASE_BUILDDIR=build
 BUILDNAME=$(GOOS)-$(GOARCH)
 BUILDDIR=$(BASE_BUILDDIR)/$(BUILDNAME)
 VERSION?=dev
 CONTAINPATH=/go/src/github.com/kaponocloud/dnslookup
+# CODEBASE=/Users/ysun/dev/dnslookup
+CODEBASE=/home/ysun/dev/dnslookup
 
 ifeq ($(GOOS),windows)
   ext=.exe
@@ -26,12 +29,12 @@ release: check-env-release
 	CGO_ENABLED=0 GOOS=$(GOOS) GOARCH=$(GOARCH) go build -ldflags "-X main.VersionString=$(VERSION)" -o $(BUILDDIR)/$(NAME)$(ext)
 	cd $(BASE_BUILDDIR) ; $(archiveCmd)
 docker:
-	docker run --name golang -v /Users/ysun/dev/dnslookup:$(CONTAINPATH) -e GOOS=darwin -e GOARCH=amd64 --rm golang:1.14 sh -c \
+	docker run --name golang -v $(CODEBASE):$(CONTAINPATH) -e GOOS=$(GOOS) -e GOARCH=$(GOARCH) --rm golang:1.14 sh -c \
 	"cd $(CONTAINPATH) && make release"
 dockerstop:
 	docker stop golang && docker rm golang
-docker1:
-	docker run --name golang -v /Users/ysun/dev/dnslookup:$(CONTAINPATH) -e GOOS=darwin -e GOARCH=amd64 --rm -d golang:1.14 sh -c \
+docker4build:
+	docker run --name golang -v $(CODEBASE):$(CONTAINPATH) -e GOOS=$(GOOS) -e GOARCH=$(GOARCH) --rm -d golang:1.14 sh -c \
 	"tail -f /dev/null"
 test:
 	go test -race -v -bench=. ./...
